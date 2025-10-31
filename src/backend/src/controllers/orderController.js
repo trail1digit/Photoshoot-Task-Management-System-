@@ -1,7 +1,22 @@
 const orderService = require("../services/orderService");
 
-const addOrder = (req, res, next) => {
+const addOrder = async (req, res, next) => {
+    try {
+        const response = await orderService.addOrder(req.body, req.user)
+        res.status(201).json({
+            success: true,
+            message: "Order Added successfully",
+            data: response,
+        });
+    } catch (error) {
+        // single try-catch handles all errors
+        console.error("Error in order controller:", error.message);
 
+        res.status(error.statusCode || 500).json({
+            success: false,
+            message: error.message || "Internal Server Error",
+        });
+    }
 }
 
 module.exports = {

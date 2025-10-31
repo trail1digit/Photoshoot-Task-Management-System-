@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 
 const EmployeeSchema = new mongoose.Schema({
   role_id: { type: mongoose.Schema.Types.ObjectId, ref: "Role", required: true },

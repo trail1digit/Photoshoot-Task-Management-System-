@@ -7,9 +7,11 @@ const routes = require("./routes/index");
 
 // Calling db connection
 db();
+
 // Use body-parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 // Routes
 app.use("/api", routes);
 
@@ -17,7 +19,6 @@ app.use("/api", routes);
 app.get('/', (req, res) => {
     res.send('Hello, World!');
 });
-
 
 // Start the server
 app.listen(process.env.PORT, () => {

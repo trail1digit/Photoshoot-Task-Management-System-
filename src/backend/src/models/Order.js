@@ -10,7 +10,17 @@ const OrderSchema = new mongoose.Schema({
   created_at: { type: Date, default: Date.now },
   status: { type: String, enum: ["open", "completed", "cancelled"], default: "open" },
   completed_at: { type: Date },
-  task_id: { type: String },
+  task_id: {
+    type: String,
+    unique: true,
+  },
 }, { timestamps: true });
+
+OrderSchema.pre("save", function (next) {
+  if (!this.task_id) {
+    this.task_id = "TASK-" + this._id.toString().slice(-6).toUpperCase();
+  }
+  next();
+});
 
 module.exports = mongoose.model("Order", OrderSchema);

@@ -1,48 +1,76 @@
 const roleService = require("../services/roleService");
 
-const getModuleData = (req, res, next) => {
-    roleService.getModuleData()
-        .then((response) => {
-            res.send({
-                message: "Data getting Successfully",
-                data: response
-            })
-        }).catch((err) => {
-            console.log(err);
+const getModuleData = async (req, res, next) => {
+    try {
+        const response = await roleService.getModuleData();
+        res.status(201).json({
+            success: true,
+            message: "Data getting successfully",
+            data: response,
         });
+    } catch (error) {
+        console.error("Error in Role controller:", error.message);
+
+        res.status(error.statusCode || 500).json({
+            success: false,
+            message: error.message || "Internal Server Error",
+        });
+    }
 }
 
-const addModule = (req, res, next) => {
-    roleService.addModule(req.body)
-        .then((response) => {
-            res.send({
-                message: "Data Added Successfully"
-            })
-        }).catch((err) => {
-            console.log(err);
+const addModule = async (req, res, next) => {
+    try {
+        const response = await roleService.addModule(req.body);
+        res.status(201).json({
+            success: true,
+            message: "Data Added successfully",
+            data: response,
         });
+    } catch (error) {
+        console.error("Error in role controller:", error.message);
+
+        res.status(error.statusCode || 500).json({
+            success: false,
+            message: error.message || "Internal Server Error",
+        });
+    }
 }
 
-const addSubModule = (req, res, next) => {
-    roleService.addSubModule(req.body)
-        .then((response) => {
-            res.send({
-                message: "Data Added Successfully"
-            })
-        }).catch((err) => {
-            console.log(err);
+const addSubModule = async (req, res, next) => {
+    try {
+        const response = await roleService.addSubModule(req.body);
+        res.status(201).json({
+            success: true,
+            message: "Data Added successfully",
+            data: response,
         });
+    } catch (error) {
+        console.error("Error in role controller:", error.message);
+
+        res.status(error.statusCode || 500).json({
+            success: false,
+            message: error.message || "Internal Server Error",
+        });
+    }
 }
 
-const addRole = (req, res, next) => {
-    roleService.addRole(req.body)
-        .then((response) => {
-            res.send({
-                message: "Data Added Successfully"
-            })
-        }).catch((err) => {
-            throw new Error(err);
+const addRole = async (req, res, next) => {
+    try {
+        const response = await roleService.addRole(req.body)
+
+        res.status(201).json({
+            success: true,
+            message: "Data Added successfully",
+            data: response,
         });
+    } catch (error) {
+        console.error("Error in role controller:", error.message);
+
+        res.status(error.statusCode || 500).json({
+            success: false,
+            message: error.message || "Internal Server Error",
+        });
+    }
 }
 
 module.exports = {
