@@ -12,13 +12,7 @@ const list = async (req, res, next) => {
 
         // return response;
     } catch (error) {
-
-        console.error("Error in order controller:", error);
-
-        res.status(error.statusCode || 500).json({
-            success: false,
-            message: error.message || "Internal Server Error",
-        });
+        next(error); // forward to centralized error handler
     }
 }
 

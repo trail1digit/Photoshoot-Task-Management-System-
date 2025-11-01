@@ -10,46 +10,54 @@ async function getModuleData() {
 }
 
 async function addModule(data) {
-    let {
-        module_name,
-        icon,
-        path,
-        key,
-        position
-    } = data;
+    try {
+        let {
+            module_name,
+            icon,
+            path,
+            key,
+            position
+        } = data;
 
-    const newModule = new Module({
-        module_name,
-        icon,
-        path,
-        key,
-        position
-    });
+        const newModule = new Module({
+            module_name,
+            icon,
+            path,
+            key,
+            position
+        });
 
-    await newModule.save();
+        await newModule.save();
+    } catch (err) {
+        throw err;
+    }
 
 }
 
 async function addSubModule(data) {
-    let {
-        module_id,
-        submodule_name,
-        icon,
-        path,
-        key,
-        position
-    } = data;
+    try {
+        let {
+            module_id,
+            submodule_name,
+            icon,
+            path,
+            key,
+            position
+        } = data;
 
-    const newSubModule = new SubModule({
-        module_id,
-        submodule_name,
-        icon,
-        path,
-        key,
-        position
-    });
+        const newSubModule = new SubModule({
+            module_id,
+            submodule_name,
+            icon,
+            path,
+            key,
+            position
+        });
 
-    await newSubModule.save();
+        await newSubModule.save();
+    } catch (err) {
+        throw err;
+    }
 
 }
 

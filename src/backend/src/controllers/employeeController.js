@@ -1,6 +1,6 @@
 const employeeService = require("../services/employeeService");
 
-const register = async (req, res) => {
+const register = async (req, res, next) => {
   try {
     const response = await employeeService.register(req.body);
 
@@ -11,13 +11,7 @@ const register = async (req, res) => {
     });
 
   } catch (error) {
-
-    console.error("Error in employee controller:", error.message);
-
-    res.status(error.statusCode || 500).json({
-      success: false,
-      message: error.message || "Internal Server Error",
-    });
+    next(error); // forward to centralized error handler
   }
 };
 
@@ -33,15 +27,10 @@ const login = async (req, res, next) => {
     });
 
   } catch (error) {
-
-    console.error("Error in employee controller:", error.message);
-
-    res.status(error.statusCode || 500).json({
-      success: false,
-      message: error.message || "Internal Server Error",
-    });
+    next(error); // forward to centralized error handler
   }
 }
+
 const uploadDocument = async (req, res, next) => {
   try {
     const response = await employeeService.uploadDocument(req.body, req.file);
@@ -53,12 +42,7 @@ const uploadDocument = async (req, res, next) => {
     });
 
   } catch (error) {
-    console.error("Error in employee controller:", error.message);
-
-    res.status(error.statusCode || 500).json({
-      success: false,
-      message: error.message || "Internal Server Error",
-    });
+    next(error); // forward to centralized error handler
   }
 }
 
@@ -73,12 +57,7 @@ const viewDoc = async (req, res, next) => {
     });
 
   } catch (error) {
-    console.error("Error in employee controller:", error.message);
-
-    res.status(error.statusCode || 500).json({
-      success: false,
-      message: error.message || "Internal Server Error",
-    });
+    next(error); // forward to centralized error handler
   }
 }
 

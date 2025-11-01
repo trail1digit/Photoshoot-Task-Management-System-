@@ -19,10 +19,20 @@ app.use('/uploads', express.static('uploads'));
 
 // Define a route
 app.get('/', (req, res) => {
-    res.send('Backend Running!');
+  res.send('Backend Running!');
 });
+
+app.use((err, req, res, next) => {
+  console.error("Error:", err);
+
+  res.status(err.statusCode || 500).json({
+    success: false,
+    message: err.message || "Internal Server Error",
+  });
+});
+
 
 // Start the server
 app.listen(process.env.PORT, () => {
-    console.log(`Server is running on http://localhost:${process.env.PORT}`);
+  console.log(`Server is running on http://localhost:${process.env.PORT}`);
 });

@@ -42,9 +42,8 @@ async function addOrder(data, user) {
     session.endSession();
 
     console.error("Add Order Error:", err);
-    const error = new Error("Failed to create order");
-    error.statusCode = 500;
-    throw error;
+    throw err;
+
   }
 }
 
@@ -129,9 +128,8 @@ async function orderSummary(query, user) {
   } catch (err) {
     console.error("Error in priority overview:", err);
 
-    const error = new Error("Failed to create order");
-    error.statusCode = 500;
-    throw error;
+    throw err;
+
   }
 }
 
@@ -162,9 +160,8 @@ async function priorityOverview() {
   } catch (err) {
     console.error("Error in priority overview:", err);
 
-    const error = new Error("Failed to create order");
-    error.statusCode = 500;
-    throw error;
+    throw err;
+
   }
 }
 
@@ -209,9 +206,8 @@ async function delayAnalysis() {
     return response;
   } catch (err) {
     console.error("Err in delay/stuck analysis:", err);
-    const error = new Error("Failed to create order");
-    error.statusCode = 500;
-    throw error;
+    throw err;
+
   }
 
 }

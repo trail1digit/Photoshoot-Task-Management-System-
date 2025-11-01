@@ -9,12 +9,7 @@ const getModuleData = async (req, res, next) => {
             data: response,
         });
     } catch (error) {
-        console.error("Error in Role controller:", error.message);
-
-        res.status(error.statusCode || 500).json({
-            success: false,
-            message: error.message || "Internal Server Error",
-        });
+        next(error); // forward to centralized error handler
     }
 }
 
@@ -27,12 +22,7 @@ const addModule = async (req, res, next) => {
             data: response,
         });
     } catch (error) {
-        console.error("Error in role controller:", error.message);
-
-        res.status(error.statusCode || 500).json({
-            success: false,
-            message: error.message || "Internal Server Error",
-        });
+        next(error); // forward to centralized error handler
     }
 }
 
@@ -45,12 +35,7 @@ const addSubModule = async (req, res, next) => {
             data: response,
         });
     } catch (error) {
-        console.error("Error in role controller:", error.message);
-
-        res.status(error.statusCode || 500).json({
-            success: false,
-            message: error.message || "Internal Server Error",
-        });
+        next(error); // forward to centralized error handler
     }
 }
 
@@ -64,12 +49,7 @@ const addRole = async (req, res, next) => {
             data: response,
         });
     } catch (error) {
-        console.error("Error in role controller:", error.message);
-
-        res.status(error.statusCode || 500).json({
-            success: false,
-            message: error.message || "Internal Server Error",
-        });
+        next(error); // forward to centralized error handler
     }
 }
 

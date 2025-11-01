@@ -9,13 +9,7 @@ const addOrder = async (req, res, next) => {
             data: response,
         });
     } catch (error) {
-
-        console.error("Error in order controller:", error.message);
-
-        res.status(error.statusCode || 500).json({
-            success: false,
-            message: error.message || "Internal Server Error",
-        });
+        next(error); // forward to centralized error handler
     }
 }
 
@@ -30,13 +24,7 @@ const orderSummary = async (req, res, next) => {
 
         // return response;
     } catch (error) {
-
-        console.error("Error in order controller:", error);
-
-        res.status(error.statusCode || 500).json({
-            success: false,
-            message: error.message || "Internal Server Error",
-        });
+        next(error); // forward to centralized error handler
     }
 }
 
@@ -49,12 +37,8 @@ const priorityOverview = async (req, res, next) => {
             data: response,
         });
     } catch (error) {
-        console.error("Error in order controller:", error);
+        next(error); // forward to centralized error handler
 
-        res.status(error.statusCode || 500).json({
-            success: false,
-            message: error.message || "Internal Server Error",
-        });
     }
 }
 const delayAnalysis = async (req, res, next) => {
@@ -66,12 +50,8 @@ const delayAnalysis = async (req, res, next) => {
             data: response,
         });
     } catch (error) {
-        console.error("Error in order controller:", error);
+        next(error); // forward to centralized error handler
 
-        res.status(error.statusCode || 500).json({
-            success: false,
-            message: error.message || "Internal Server Error",
-        });
     }
 }
 

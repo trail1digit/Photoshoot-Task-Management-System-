@@ -21,9 +21,7 @@ async function list(query, user_id) {
         return response;
     } catch (err) {
         console.error("Add Order Error:", err);
-        const error = new Error("Failed to create order");
-        error.statusCode = 500;
-        throw error;
+        throw err;
     }
 }
 

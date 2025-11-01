@@ -6,80 +6,89 @@ const jwt = require("jsonwebtoken");
 const path = require("path");
 
 async function register(data) {
-  const { role_id, name, address, email, password, phoneno } = data;
+  try {
+    const { role_id, name, address, email, password, phoneno } = data;
 
-  if (!email || !password || !name) {
-    const error = new Error("Name, email, and password are required");
-    error.statusCode = 400;
-    throw error;
-  }
+    if (!email || !password || !name) {
+      const error = new Error("Name, email, and password are required");
+      error.statusCode = 400;
+      throw error;
+    }
 
-  const existingEmployee = await Employee.findOne({ email });
-  if (existingEmployee) {
-    const error = new Error("Email already registered");
-    error.statusCode = 409;
-    throw error;
-  }
+    const existingEmployee = await Employee.findOne({ email });
+    if (existingEmployee) {
+      const error = new Error("Email already registered");
+      error.statusCode = 409;
+      throw error;
+    }
 
-  const employee = new Employee({
-    role_id,
-    name,
-    address,
-    email,
-    password,
-    phoneno,
-  });
+    const employee = new Employee({
+      role_id,
+      name,
+      address,
+      email,
+      password,
+      phoneno,
+    });
 
-  await employee.save();
+    await employee.save();
 
-  return {
-    id: employee._id,
-    name: employee.name,
-    email: employee.email,
-  };
-}
-
-async function login(data) {
-  const { email, password } = data;
-
-  if (!email || !password) {
-    const error = new Error("Email and password are required");
-    error.statusCode = 400;
-    throw error;
-  }
-
-  const employee = await Employee.findOne({ email });
-  if (!employee) {
-    const error = new Error("Invalid credentials");
-    error.statusCode = 401;
-    throw error;
-  }
-
-  const isMatch = await bcrypt.compare(password, employee.password);
-  if (!isMatch) {
-    const error = new Error("Invalid credentials");
-    error.statusCode = 401;
-    throw error;
-  }
-
-  const token = jwt.sign(
-    { id: employee._id, role_id: employee.role_id },
-    process.env.JWT_SECRET,
-    { expiresIn: "7d" }
-  );
-
-  const permissionData = await Permission.find({ role_id: employee.role_id }).populate([
-    { path: "role_id" }, { path: "module_id" }, { path: "submodule_id" }
-  ]);
-  return {
-    token,
-    employee: {
+    return {
       id: employee._id,
       name: employee.name,
       email: employee.email,
-    },
-    permissions: permissionData
-  };
+    };
+
+  } catch (err) {
+    throw err;
+  }
+}
+
+async function login(data) {
+  try {
+    const { email, password } = data;
+
+    if (!email || !password) {
+      const error = new Error("Email and password are required");
+      error.statusCode = 400;
+      throw error;
+    }
+
+    const employee = await Employee.findOne({ email });
+    if (!employee) {
+      const error = new Error("Invalid credentials");
+      error.statusCode = 401;
+      throw error;
+    }
+
+    const isMatch = await bcrypt.compare(password, employee.password);
+    if (!isMatch) {
+      const error = new Error("Invalid credentials");
+      error.statusCode = 401;
+      throw error;
+    }
+
+    const token = jwt.sign(
+      { id: employee._id, role_id: employee.role_id },
+      process.env.JWT_SECRET,
+      { expiresIn: "7d" }
+    );
+
+    const permissionData = await Permission.find({ role_id: employee.role_id }).populate([
+      { path: "role_id" }, { path: "module_id" }, { path: "submodule_id" }
+    ]);
+    return {
+      token,
+      employee: {
+        id: employee._id,
+        name: employee.name,
+        email: employee.email,
+      },
+      permissions: permissionData
+    };
+  } catch (err) {
+    throw err;
+  }
 }
 
 async function uploadDocument(data, file) {
@@ -132,33 +141,34 @@ async function uploadDocument(data, file) {
   } catch (err) {
     // res.status(500).json({ success: false, error: error.message });
     console.error("Err in delay/stuck analysis:", err);
-    const error = new Error("Failed to create order");
-    error.statusCode = 500;
-    throw error;
+    // const error = new Error("Failed to create order");
+    // error.statusCode = 500;
+    throw err;
   }
 }
 
 async function viewDoc(query) {
-  const { employee_id, docType } = query;
-  let filter = {};
-  if ((employee_id || employee_id != "") && employee_id != undefined) {
-    filter.employee_id = employee_id;
+  try {
+    const { employee_id, docType } = query;
+    let filter = {};
+    if ((employee_id || employee_id != "") && employee_id != undefined) {
+      filter.employee_id = employee_id;
+    }
+    if ((docType || docType != "") && docType != undefined) {
+      filter.docType = docType;
+    }
+
+
+    const listData = await EmployeeDoc.find(filter)
+      .populate("employee_id")
+      .sort({ created_at: -1 })
+
+    return {
+      list: listData
+    };
+  } catch (err) {
+    throw err;
   }
-  if ((docType || docType != "") && docType != undefined) {
-    filter.docType = docType;
-  }
-
-  console.log(filter);
-  
-
-  const listData = await EmployeeDoc.find(filter)
-    .populate("employee_id")
-    .sort({ created_at: -1 })
-  console.log(listData);
-
-  return {
-    list: listData
-  };
 }
 module.exports = {
   register,

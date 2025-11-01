@@ -1,120 +1,88 @@
 const subTaskService = require("../services/subTaskService");
 
-const addSubTask = (req, res, next) => {
-    try {
-        const response = subTaskService.addSubTask(req.body, req.user.id);
-        res.status(201).json({
-            success: true,
-            message: "Data Added successfully",
-            data: response,
-        });
-    } catch (error) {
+const addSubTask = async (req, res, next) => {
+  try {
+    const response = await subTaskService.addSubTask(req.body, req.user.id);
+    res.status(201).json({
+      success: true,
+      message: "Subtask added successfully",
+      data: response,
+    });
+  } catch (error) {
+    next(error); // forward to centralized error handler
+  }
+};
 
-        console.error("Error in subtask controller:", error.message);
-
-        res.status(error.statusCode || 500).json({
-            success: false,
-            message: error.message || "Internal Server Error",
-        });
-    }
-}
-
-const updateSubTask = (req, res, next) => {
-    try {
-        const response = subTaskService.updateSubTask(req.params.id, req.body, req.user.id);
-        res.status(201).json({
-            success: true,
-            message: "Data Updated successfully",
-            data: response,
-        });
-    } catch (error) {
-
-        console.error("Error in subtask controller:", error.message);
-
-        res.status(error.statusCode || 500).json({
-            success: false,
-            message: error.message || "Internal Server Error",
-        });
-    }
-}
+const updateSubTask = async (req, res, next) => {
+  try {
+    const response = await subTaskService.updateSubTask(req.params.id, req.body, req.user.id);
+    res.status(200).json({
+      success: true,
+      message: "Subtask updated successfully",
+      data: response,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
 const cancelSubTask = async (req, res, next) => {
-    try {
-        const response = await subTaskService.cancelSubTask(
-            req.params.id,
-            req.body,
-            req.user.id // if token middleware sets user
-        );
-        res.status(200).json(response);
-    } catch (err) {
-        console.error("Cancel Subtask Error:", err);
-        res.status(err.statusCode || 500).json({ message: err.message });
-    }
+  try {
+    const response = await subTaskService.cancelSubTask(req.params.id, req.body, req.user.id);
+    res.status(200).json({
+      success: true,
+      message: "Subtask cancelled successfully",
+      data: response,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
 const reopenSubTask = async (req, res, next) => {
-    try {
-        const response = subTaskService.reopenSubTask(req.params.id, req.user.id);
-        res.status(201).json({
-            success: true,
-            message: "Data Updated successfully",
-            data: response,
-        });
-    } catch (error) {
-
-        console.error("Error in subtask controller:", error.message);
-
-        res.status(error.statusCode || 500).json({
-            success: false,
-            message: error.message || "Internal Server Error",
-        });
-    }
-}
+  try {
+    const response = await subTaskService.reopenSubTask(req.params.id, req.user.id);
+    res.status(200).json({
+      success: true,
+      message: "Subtask reopened successfully",
+      data: response,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
 const completeSubTask = async (req, res, next) => {
-    try {
-        const response = subTaskService.completeSubTask(req.params.id, req.user.id);
-        res.status(201).json({
-            success: true,
-            message: "Data Updated successfully",
-            data: response,
-        });
-    } catch (error) {
-
-        console.error("Error in subtask controller:", error.message);
-
-        res.status(error.statusCode || 500).json({
-            success: false,
-            message: error.message || "Internal Server Error",
-        });
-    }
-}
+  try {
+    const response = await subTaskService.completeSubTask(req.params.id, req.user.id);
+    res.status(200).json({
+      success: true,
+      message: "Subtask completed successfully",
+      data: response,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
 const markAsUrgent = async (req, res, next) => {
-    try {
-        const response = subTaskService.markUrgentSubTask(req.params.id, req.body, req.user.id);
-        res.status(201).json({
-            success: true,
-            message: "Data Updated successfully",
-            data: response,
-        });
-        // return response;
-    } catch (error) {
-
-        console.error("Error in subtask controller:", error.message);
-
-        res.status(error.statusCode || 500).json({
-            success: false,
-            message: error.message || "Internal Server Error",
-        });
-    }
-}
+  try {
+    const response = await subTaskService.markUrgentSubTask(req.params.id, req.body, req.user.id);
+    res.status(200).json({
+      success: true,
+      message: "Subtask urgency updated successfully",
+      data: response,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
 module.exports = {
-    addSubTask,
-    updateSubTask,
-    cancelSubTask,
-    reopenSubTask,
-    completeSubTask,
-    markAsUrgent
-}
+  addSubTask,
+  updateSubTask,
+  cancelSubTask,
+  reopenSubTask,
+  completeSubTask,
+  markAsUrgent,
+};

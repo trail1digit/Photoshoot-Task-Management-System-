@@ -4,7 +4,7 @@ const fs = require("fs");
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-    
+
         const { employee_no, docType } = req.body;
 
         // Create path: uploads/employee_no/docType/
@@ -17,12 +17,10 @@ const storage = multer.diskStorage({
         const filesInFolder = fs.readdirSync(folderPath);
 
         if (filesInFolder.length > 0) {
-            console.log(`Files found in ${folderPath}:`, filesInFolder);
             // Delete old files before uploading new one
             filesInFolder.forEach(file => {
                 const filePath = path.join(folderPath, file);
                 fs.unlinkSync(filePath);
-                console.log(`Deleted old file: ${filePath}`);
             });
         }
 
