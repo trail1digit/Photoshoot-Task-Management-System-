@@ -6,11 +6,11 @@ const Order = require("../models/Order");
 const { sendNotification } = require("../utils/notification");
 const Notification = require("../models/Notifications");
 
-async function notifyUsers(userIds, title, message, data = {}) {
+async function notifyUsers(userId, title, message, data = {}) {
   const tokens = [];
-  for (const userId of userIds) {
+  // for (const userId of userIds) {
     const notif = new Notification({
-      userId,
+      user_id: userId,
       title,
       message,
       read_status: false,
@@ -21,7 +21,7 @@ async function notifyUsers(userIds, title, message, data = {}) {
     // if using tokens in User model
     // const user = await User.findById(userId);
     // if (user?.fcm_token) tokens.push(user.fcm_token);
-  }
+  // }
 
   if (tokens.length > 0) {
     await sendNotification(tokens, title, message, data);
@@ -48,7 +48,7 @@ async function addSubTask(data, userId) {
     await ActivityLog.create([{
       order_id,
       subtask_id: savedSubtask._id,
-      user_id: userId || 1,
+      user_id: userId,
       action: "created",
       details: "Subtask created",
     }], { session });
@@ -57,7 +57,7 @@ async function addSubTask(data, userId) {
     session.endSession();
 
     await notifyUsers(
-      [userId],
+      userId,
       "New Subtask Created",
       `A new subtask (${savedSubtask._id}) has been created for order ${order_id}.`,
       { subtask_id: savedSubtask._id.toString(), order_id: order_id.toString() }
@@ -68,6 +68,8 @@ async function addSubTask(data, userId) {
       subtask: savedSubtask,
     };
   } catch (err) {
+    console.log(err);
+    
     await session.abortTransaction();
     session.endSession();
     throw err;
@@ -318,11 +320,11 @@ async function markUrgentSubTask(subtaskId, data, userId) {
     await session.commitTransaction();
     session.endSession();
 
-    const photographyTeamTokens = [
-      // Replace with actual tokens fetched from DB
-      "fcm_token_1",
-      "fcm_token_2",
-    ];
+    // const photographyTeamTokens = [
+    //   // Replace with actual tokens fetched from DB
+    //   "fcm_token_1",
+    //   "fcm_token_2",
+    // ];
 
     const title = isUrgent
       ? "Urgent Subtask Assigned"
@@ -332,7 +334,7 @@ async function markUrgentSubTask(subtaskId, data, userId) {
 
 
     await notifyUsers(
-      photographyTeamTokens,
+      userId,
       title,
       body,
       { subtask_id: subtasks._id.toString() }
@@ -344,6 +346,8 @@ async function markUrgentSubTask(subtaskId, data, userId) {
       is_urgent: subtasks.is_urgent,
     };
   } catch (error) {
+    console.log(error);
+    
     await session.abortTransaction();
     session.endSession();
     throw error;

@@ -15,9 +15,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Routes
 app.use("/api", routes);
 
+app.use('/uploads', express.static('uploads'));
+
 // Define a route
 app.get('/', (req, res) => {
-    res.send('Hello, World!');
+    res.send('Backend Running!');
 });
 
 // Start the server

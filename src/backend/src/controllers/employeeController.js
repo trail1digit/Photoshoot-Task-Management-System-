@@ -12,7 +12,7 @@ const register = async (req, res) => {
 
   } catch (error) {
 
-    console.error("Error in register controller:", error.message);
+    console.error("Error in employee controller:", error.message);
 
     res.status(error.statusCode || 500).json({
       success: false,
@@ -20,6 +20,7 @@ const register = async (req, res) => {
     });
   }
 };
+
 
 const login = async (req, res, next) => {
   try {
@@ -33,7 +34,26 @@ const login = async (req, res, next) => {
 
   } catch (error) {
 
-    console.error("Error in register controller:", error.message);
+    console.error("Error in employee controller:", error.message);
+
+    res.status(error.statusCode || 500).json({
+      success: false,
+      message: error.message || "Internal Server Error",
+    });
+  }
+}
+const uploadDocument = async (req, res, next) => {
+  try {
+    const response = await employeeService.uploadDocument(req.body, req.file);
+
+    res.status(201).json({
+      success: true,
+      message: "Document upload successfully",
+      data: response,
+    });
+
+  } catch (error) {
+    console.error("Error in employee controller:", error.message);
 
     res.status(error.statusCode || 500).json({
       success: false,
@@ -42,7 +62,30 @@ const login = async (req, res, next) => {
   }
 }
 
+const viewDoc = async (req, res, next) => {
+  try {
+    const response = await employeeService.viewDoc(req.query);
+
+    res.status(201).json({
+      success: true,
+      message: "Document getting successfully",
+      data: response,
+    });
+
+  } catch (error) {
+    console.error("Error in employee controller:", error.message);
+
+    res.status(error.statusCode || 500).json({
+      success: false,
+      message: error.message || "Internal Server Error",
+    });
+  }
+}
+
+
 module.exports = {
   register,
-  login
+  login,
+  uploadDocument,
+  viewDoc
 };

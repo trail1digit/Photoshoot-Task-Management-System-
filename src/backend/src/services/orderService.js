@@ -23,7 +23,7 @@ async function addOrder(data, user) {
 
     const newActivityLog = new ActivityLog({
       order_id: savedOrder._id,
-      subtask_id: '',
+      subtask_id: undefined,
       user_id: user.id,
       action: "created",
       details: "Task Created",
@@ -148,7 +148,7 @@ async function priorityOverview() {
 
     const normalCount = await SubTask.countDocuments({
       is_urgent: false,
-      due_at: { $gte: now },
+      // due_at: { $gte: now },
       status: { $nin: ["done", "cancelled"] }
     });
 
@@ -180,7 +180,7 @@ async function delayAnalysis() {
 
     const delayedTasks = await SubTask.find({
       due_at: { $lt: now },
-      status: { $nin: ["done", "cancelled"] }
+      // status: { $nin: ["done", "cancelled"] }
     });
 
     const dueSoonTasks = await SubTask.find({

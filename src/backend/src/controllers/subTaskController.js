@@ -93,12 +93,12 @@ const completeSubTask = async (req, res, next) => {
 const markAsUrgent = async (req, res, next) => {
     try {
         const response = subTaskService.markUrgentSubTask(req.params.id, req.body, req.user.id);
-        // res.status(201).json({
-        //     success: true,
-        //     message: "Data Updated successfully",
-        //     data: response,
-        // });
-        return response;
+        res.status(201).json({
+            success: true,
+            message: "Data Updated successfully",
+            data: response,
+        });
+        // return response;
     } catch (error) {
 
         console.error("Error in subtask controller:", error.message);
