@@ -57,14 +57,12 @@ async function addRole(data) {
     try {
         const { role_name, is_admin, permission } = data;
 
-        // 1️⃣ Create the role
         const newRole = new Role({ role_name, is_admin });
         const savedRole = await newRole.save();
 
-        // 2️⃣ Create permissions for that role
         if (permission && Array.isArray(permission)) {
             const permissionDocs = permission.map(p => ({
-                role_id: savedRole._id, // assign the new role’s ID
+                role_id: savedRole._id,
                 module_id: p.module_id,
                 submodule_id: mongoose.Types.ObjectId.isValid(p.submodule_id) ? p.submodule_id : undefined,
                 create: p.create,

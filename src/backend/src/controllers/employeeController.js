@@ -11,7 +11,7 @@ const register = async (req, res) => {
     });
 
   } catch (error) {
-    // single try-catch handles all errors
+
     console.error("Error in register controller:", error.message);
 
     res.status(error.statusCode || 500).json({
@@ -32,7 +32,7 @@ const login = async (req, res, next) => {
     });
 
   } catch (error) {
-    // single try-catch handles all errors
+
     console.error("Error in register controller:", error.message);
 
     res.status(error.statusCode || 500).json({

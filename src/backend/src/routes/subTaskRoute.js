@@ -8,4 +8,6 @@ route.put("/updateSubTask/:id", verifyToken, subTaskController.updateSubTask);
 route.put("/cancelSubTask/:id", verifyToken, subTaskController.cancelSubTask);
 route.post("/reopenSubTask/:id", verifyToken, subTaskController.reopenSubTask);
 route.post("/completeSubTask/:id", verifyToken, subTaskController.completeSubTask);
+route.post("/markAsUrgent/:id", verifyToken, subTaskController.markAsUrgent);
+
 module.exports = route;

@@ -9,7 +9,7 @@ const addSubTask = (req, res, next) => {
             data: response,
         });
     } catch (error) {
-        // single try-catch handles all errors
+
         console.error("Error in subtask controller:", error.message);
 
         res.status(error.statusCode || 500).json({
@@ -28,7 +28,7 @@ const updateSubTask = (req, res, next) => {
             data: response,
         });
     } catch (error) {
-        // single try-catch handles all errors
+
         console.error("Error in subtask controller:", error.message);
 
         res.status(error.statusCode || 500).json({
@@ -61,7 +61,7 @@ const reopenSubTask = async (req, res, next) => {
             data: response,
         });
     } catch (error) {
-        // single try-catch handles all errors
+
         console.error("Error in subtask controller:", error.message);
 
         res.status(error.statusCode || 500).json({
@@ -80,7 +80,27 @@ const completeSubTask = async (req, res, next) => {
             data: response,
         });
     } catch (error) {
-        // single try-catch handles all errors
+
+        console.error("Error in subtask controller:", error.message);
+
+        res.status(error.statusCode || 500).json({
+            success: false,
+            message: error.message || "Internal Server Error",
+        });
+    }
+}
+
+const markAsUrgent = async (req, res, next) => {
+    try {
+        const response = subTaskService.markUrgentSubTask(req.params.id, req.body, req.user.id);
+        // res.status(201).json({
+        //     success: true,
+        //     message: "Data Updated successfully",
+        //     data: response,
+        // });
+        return response;
+    } catch (error) {
+
         console.error("Error in subtask controller:", error.message);
 
         res.status(error.statusCode || 500).json({
@@ -95,5 +115,6 @@ module.exports = {
     updateSubTask,
     cancelSubTask,
     reopenSubTask,
-    completeSubTask
+    completeSubTask,
+    markAsUrgent
 }

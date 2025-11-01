@@ -8,6 +8,7 @@ const EmployeeSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   phoneno: { type: String },
+  fcm_token: { type: String },
 }, { timestamps: true });
 
 // Hash password before saving
