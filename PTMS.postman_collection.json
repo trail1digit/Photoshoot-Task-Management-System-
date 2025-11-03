@@ -1,0 +1,643 @@
+{
+	"info": {
+		"_postman_id": "1fc2938a-6827-4ed4-8f32-689376e7b608",
+		"name": "PTMS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48514468",
+		"_collection_link": "https://trial-1digittechnology-8469133.postman.co/workspace/Raj-Bhatt's-Workspace~7a720c64-dd99-4063-8e16-5762148f7d3e/collection/48514468-1fc2938a-6827-4ed4-8f32-689376e7b608?action=share&source=collection_link&creator=48514468"
+	},
+	"item": [
+		{
+			"name": "role-addModule",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"module_name\": \"Employee List\",\r\n    \"icon\": \"\",\r\n    \"path\": \"/employeelist\",\r\n    \"key\": \"employeelist\",\r\n    \"position\": \"4\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{LocalUrl}}/api/role/addModule",
+					"host": [
+						"{{LocalUrl}}"
+					],
+					"path": [
+						"api",
+						"role",
+						"addModule"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "role-getModules",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{AuthToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{LocalUrl}}/api/role/getModules",
+					"host": [
+						"{{LocalUrl}}"
+					],
+					"path": [
+						"api",
+						"role",
+						"getModules"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "role-addSubModule",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"module_id\": \"690457294bbd70fe5eea8bae\",\r\n    \"submodule_name\": \"Sub Tasks\",\r\n    \"icon\": \"\",\r\n    \"path\": \"/subtask\",\r\n    \"key\": \"subtask\",\r\n    \"position\": \"2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{LocalUrl}}/api/role/addSubModule",
+					"host": [
+						"{{LocalUrl}}"
+					],
+					"path": [
+						"api",
+						"role",
+						"addSubModule"
+					]
+				},
+				"description": "Generated from cURL: curl --location 'http://localhost:8000/api/role/addModule' \\\r\n--header 'Content-Type: application/json' \\\r\n--data '{\r\n    \"module_name\": \"Task Management\",\r\n    \"icon\": \"\",\r\n    \"path\": \"/taskmanagement\",\r\n    \"key\": \"taskmanagement\",\r\n    \"position\": \"2\"\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "role-addRole",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"role_name\": \"Manager\",\r\n  \"is_admin\": true,\r\n  \"permission\": [\r\n    {\r\n      \"module_id\": \"690456454bbd70fe5eea8bac\",\r\n      \"submodule_id\": \"\",\r\n      \"create\": true,\r\n      \"edit\": true,\r\n      \"list\": true,\r\n      \"delete\": true\r\n    },\r\n    {\r\n      \"module_id\": \"690457294bbd70fe5eea8bae\",\r\n      \"submodule_id\": \"690459a0c5b310ecbbaabed7\",\r\n      \"create\": true,\r\n      \"edit\": true,\r\n      \"list\": true,\r\n      \"delete\": true\r\n    },\r\n    {\r\n      \"module_id\": \"690457294bbd70fe5eea8bae\",\r\n      \"submodule_id\": \"690459efc5b310ecbbaabed9\",\r\n      \"create\": true,\r\n      \"edit\": true,\r\n      \"list\": true,\r\n      \"delete\": true\r\n    }\r\n  ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{LocalUrl}}/api/role/addRole",
+					"host": [
+						"{{LocalUrl}}"
+					],
+					"path": [
+						"api",
+						"role",
+						"addRole"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "employee-addEmployee",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"role_id\": \"6904615724b2ad1685b73560\",\r\n    \"name\": \"Mann Patel\",\r\n    \"address\": \"Navsari\",\r\n    \"email\": \"patelms.sd@gmail.com\",\r\n    \"password\": \"mann@123\",\r\n    \"phoneno\": \"9023848495\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{LocalUrl}}/api/employee/addEmployee",
+					"host": [
+						"{{LocalUrl}}"
+					],
+					"path": [
+						"api",
+						"employee",
+						"addEmployee"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "employee-login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"patelur.sd@gmail.com\",\r\n    \"password\": \"urvi@123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{LocalUrl}}/api/employee/login",
+					"host": [
+						"{{LocalUrl}}"
+					],
+					"path": [
+						"api",
+						"employee",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "order-addOrder",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{AuthToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"order_no\": \"099\",\r\n    \"gem_type\": \"diamond\",\r\n    \"jewelry_type\": \"necklace\",\r\n    \"metal\": \"bad\",\r\n    \"tone\": \"acd\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{LocalUrl}}/api/order/addOrder",
+					"host": [
+						"{{LocalUrl}}"
+					],
+					"path": [
+						"api",
+						"order",
+						"addOrder"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "subTask-addSubTask",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{AuthToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"order_id\": \"6905cbef886ed2368f306636\",\r\n    \"company\": \"Diamond City\",\r\n    \"shoot_types\": \"Reel\",\r\n    \"is_urgent\": true,\r\n    \"due_at\": \"2025-11-08\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{LocalUrl}}/api/subTask/addSubTask",
+					"host": [
+						"{{LocalUrl}}"
+					],
+					"path": [
+						"api",
+						"subTask",
+						"addSubTask"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "subTask-updateSubTask",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{AuthToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"shoot_types\": \"Reel\",\r\n    \"is_urgent\": true,\r\n    \"due_at\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{LocalUrl}}/api/subTask/updateSubTask/6905cccf886ed2368f30663a",
+					"host": [
+						"{{LocalUrl}}"
+					],
+					"path": [
+						"api",
+						"subTask",
+						"updateSubTask",
+						"6905cccf886ed2368f30663a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "subTask-cancelSubTask",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{AuthToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cancel_reason\": \"Not Approved\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{LocalUrl}}/api/subTask/cancelSubTask/6905cccf886ed2368f30663a",
+					"host": [
+						"{{LocalUrl}}"
+					],
+					"path": [
+						"api",
+						"subTask",
+						"cancelSubTask",
+						"6905cccf886ed2368f30663a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "subTask-reopenSubTask",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{AuthToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{LocalUrl}}/api/subTask/reopenSubTask/6905cccf886ed2368f30663a",
+					"host": [
+						"{{LocalUrl}}"
+					],
+					"path": [
+						"api",
+						"subTask",
+						"reopenSubTask",
+						"6905cccf886ed2368f30663a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "subTask-completeSubTask",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{AuthToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{LocalUrl}}/api/subTask/completeSubTask/6904a9c7a68f89c8c3f3d095",
+					"host": [
+						"{{LocalUrl}}"
+					],
+					"path": [
+						"api",
+						"subTask",
+						"completeSubTask",
+						"6904a9c7a68f89c8c3f3d095"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "subTask-markAsUrgent",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{AuthToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"isUrgent\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{LocalUrl}}/api/subTask/markAsUrgent/6905cccf886ed2368f30663a",
+					"host": [
+						"{{LocalUrl}}"
+					],
+					"path": [
+						"api",
+						"subTask",
+						"markAsUrgent",
+						"6905cccf886ed2368f30663a"
+					]
+				},
+				"description": "Generated from cURL: curl --location --request POST 'http://localhost:8000/api/subTask/completeSubTask/6904a9c7a68f89c8c3f3d095' \\\r\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MDQ4YmQ3YWRjZjE4NGRmYWUyZTg4NyIsInJvbGVfaWQiOiI2OTA0NjE1NzI0YjJhZDE2ODViNzM1NjAiLCJpYXQiOjE3NjE5MDU5NTcsImV4cCI6MTc2MjUxMDc1N30.U0xzcD1iutpqIkChqHjm27tZFzFDvO8a-CZN9HmVSoI' \\\r\n--header 'Content-Type: application/json'"
+			},
+			"response": []
+		},
+		{
+			"name": "order-orderSummary",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{AuthToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{LocalUrl}}/api/order/orderSummary?type=subtask&status=pending&page=0&limit=5",
+					"host": [
+						"{{LocalUrl}}"
+					],
+					"path": [
+						"api",
+						"order",
+						"orderSummary"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "subtask"
+						},
+						{
+							"key": "status",
+							"value": "pending"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "limit",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "order-priorityOverview",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{AuthToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{LocalUrl}}/api/order/priorityOverview",
+					"host": [
+						"{{LocalUrl}}"
+					],
+					"path": [
+						"api",
+						"order",
+						"priorityOverview"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "order-delayAnalysis",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{AuthToken}}"
+					}
+				],
+				"url": {
+					"raw": "{{LocalUrl}}/api/order/delayAnalysis",
+					"host": [
+						"{{LocalUrl}}"
+					],
+					"path": [
+						"api",
+						"order",
+						"delayAnalysis"
+					]
+				},
+				"description": "Generated from cURL: curl --location 'http://localhost:8000/api/order/priorityOverview' \\\r\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MDQ4YmQ3YWRjZjE4NGRmYWUyZTg4NyIsInJvbGVfaWQiOiI2OTA0NjE1NzI0YjJhZDE2ODViNzM1NjAiLCJpYXQiOjE3NjE5MDU5NTcsImV4cCI6MTc2MjUxMDc1N30.U0xzcD1iutpqIkChqHjm27tZFzFDvO8a-CZN9HmVSoI'"
+			},
+			"response": []
+		},
+		{
+			"name": "notification-list",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{AuthToken}}"
+					}
+				],
+				"url": {
+					"raw": "{{LocalUrl}}/api/notification/list",
+					"host": [
+						"{{LocalUrl}}"
+					],
+					"path": [
+						"api",
+						"notification",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "employee-uploadDoc",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{AuthToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "employee_id",
+							"value": "6905e63d2a975d2377dfedf6",
+							"type": "text"
+						},
+						{
+							"key": "docType",
+							"value": "aadharCard",
+							"type": "text"
+						},
+						{
+							"key": "employee_no",
+							"value": "Employee-DFEDF6",
+							"type": "text"
+						},
+						{
+							"key": "document",
+							"type": "file",
+							"src": "/C:/Users/Trial.GCS-115/Downloads/panCard_Photo.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{LocalUrl}}/api/employee/uploadDoc",
+					"host": [
+						"{{LocalUrl}}"
+					],
+					"path": [
+						"api",
+						"employee",
+						"uploadDoc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "employee-viewDoc",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{AuthToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{LocalUrl}}/api/employee/viewDoc?employee_id=6905e63d2a975d2377dfedf6",
+					"host": [
+						"{{LocalUrl}}"
+					],
+					"path": [
+						"api",
+						"employee",
+						"viewDoc"
+					],
+					"query": [
+						{
+							"key": "employee_id",
+							"value": "6905e63d2a975d2377dfedf6"
+						},
+						{
+							"key": "docType",
+							"value": "aadharCard",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
